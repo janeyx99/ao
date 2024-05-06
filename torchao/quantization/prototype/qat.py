@@ -239,7 +239,8 @@ def fake_quantize_per_channel_group(
     assert group_size > 1
     assert input.shape[-1] % group_size == 0
     assert input.dim() == 2
-    assert torch.isnan(input).sum() == 0
+    # This line throws OOM
+    #assert torch.isnan(input).sum() == 0
     grouped_input = input.reshape(-1, group_size)
     scales = scales.reshape(-1, 1)
     zero_points = zero_points.reshape(-1, 1)
